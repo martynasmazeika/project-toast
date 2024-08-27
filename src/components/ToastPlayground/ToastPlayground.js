@@ -7,7 +7,7 @@ import ToastPlaygroundHeader from "../ToastPlaygroundHeader";
 import ToastPlaygroundMessage from "../ToastPlaygroundMessage";
 import ToastVariant from "../ToastVariant";
 import ToastShelf from "../ToastShelf";
-import useToast from "../../hooks/usePopToast";
+import { ToastContext } from "../ToastProvider";
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
@@ -15,7 +15,8 @@ function ToastPlayground() {
   const [selectedToastVariant, setSelectedToastVariant] = React.useState(
     VARIANT_OPTIONS[0]
   );
-  const [toasts, popToast] = useToast();
+
+  const { toasts, popToast } = React.useContext(ToastContext);
 
   return (
     <div className={styles.wrapper}>
