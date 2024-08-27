@@ -8,6 +8,7 @@ import ToastPlaygroundMessage from "../ToastPlaygroundMessage";
 import ToastVariant from "../ToastVariant";
 import ToastShelf from "../ToastShelf";
 import { ToastContext } from "../ToastProvider";
+import useEscapeKey from "../../hooks/useEscapeKey";
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
@@ -23,13 +24,7 @@ function ToastPlayground() {
       destroyAllToasts();
     }
   }, []);
-  React.useEffect(() => {
-    document.addEventListener("keydown", destroyToasts);
-
-    return () => {
-      document.removeEventListener("keydown", destroyToasts);
-    };
-  }, [destroyToasts]);
+  useEscapeKey(destroyToasts);
 
   return (
     <div className={styles.wrapper}>
