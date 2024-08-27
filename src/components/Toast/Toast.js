@@ -26,7 +26,10 @@ function Toast({ message, variant, destroyToast }) {
       <div className={styles.iconContainer}>
         <Icon size={24} />
       </div>
-      <p className={styles.content}>{message}</p>
+      <p className={styles.content}>
+        <VisuallyHidden>{variant} -</VisuallyHidden>
+        {message}
+      </p>
       <button className={styles.closeButton}>
         <X size={24} onClick={destroyToast} />
         <VisuallyHidden>Dismiss message</VisuallyHidden>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import Button from "../Button";
 
@@ -16,7 +16,20 @@ function ToastPlayground() {
     VARIANT_OPTIONS[0]
   );
 
-  const { toasts, popToast } = React.useContext(ToastContext);
+  const { toasts, popToast, destroyAllToasts } = React.useContext(ToastContext);
+
+  const destroyToasts = useCallback((event) => {
+    if (event.key === "Escape") {
+      destroyAllToasts();
+    }
+  }, []);
+  React.useEffect(() => {
+    document.addEventListener("keydown", destroyToasts);
+
+    return () => {
+      document.removeEventListener("keydown", destroyToasts);
+    };
+  }, [destroyToasts]);
 
   return (
     <div className={styles.wrapper}>

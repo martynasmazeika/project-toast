@@ -12,6 +12,10 @@ function useToast() {
     });
   }, []);
 
+  const destroyAllToasts = React.useCallback(function destroyToasts() {
+    setToasts([]);
+  }, []);
+
   const popToast = React.useCallback(
     function popToast(variant, message) {
       setToasts((currentToasts) => {
@@ -31,7 +35,7 @@ function useToast() {
     [destroyToast]
   );
 
-  return [toasts, popToast];
+  return [toasts, popToast, destroyAllToasts];
 }
 
 export default useToast;
